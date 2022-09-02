@@ -2,8 +2,41 @@
   font-family: sans-serif;
   text-align: center;
 }
+body {
+  background-color: black;
+  color: white;
+}
 
-.scanWindow {
-  height:300;
-  width:300;
+.cameraDiv {
+  z-index: 1;
+  position: fixed;
+  left: 38%;
+  right: 50%;
+  top: 100px;
+  width: 25%;
+  height: 170px;
+  background-color: #000;
+  color: white;
+}
+
+.cancelScan {
+  position: absolute;
+  float: right;
+  top: 30px;
+  right: 30px;
+  background-color: red;
+  color: white;
+  border: 3px solid black;
+}
+
+input {
+  margin-top:10px;
+}
+
+.clearButton {
+  margin-top: 10px;
+}
+
+.scanButton {
+  margin-left: 10px;
 }

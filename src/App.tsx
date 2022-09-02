@@ -1,39 +1,64 @@
 import { useState } from "react";
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
+import { FaCamera } from "react-icons/fa";
 
 import "./styles.css";
 
 export default function App() {
   const [scan, setScan] = useState(false);
   const [logs, setLog] = useState<Array<string>>([]);
+  const [input1, setInput1] = useState("");
+
+  const input1Change = (event: any) => {
+    setInput1(event.target.value);
+  };
 
   const barcodeScannerComponentHandleUpdate = (error: any, result: any) => {
+    // if (result) {
+    //   setLog([...logs, result.text]);
+    //   window.navigator.vibrate(100);
+    //   setScan(false);
+    // }
     if (result) {
-      setLog([...logs, result.text]);
-      window.navigator.vibrate(100);
+      setInput1(result);
       setScan(false);
     }
   };
 
   return (
     <div className="App">
-      <button onClick={() => setScan(true)}>SCAN</button>
-      <button onClick={() => setScan(false)}>CANCEL</button>
+      <h1>BARCODE SCANNER TEST</h1>
+      <br></br>
+      <input
+        type="text"
+        placeholder="barcode number"
+        value={input1}
+        onChange={input1Change}
+      />
+      <button className="scanButton" onClick={() => setScan(true)}>
+        <FaCamera />
+      </button>
       {scan && (
-        <div className="scanWindow">
+        <div className="cameraDiv">
           <BarcodeScannerComponent
-            width={500}
-            height={500}
+            height={200}
+            width={200}
             onUpdate={barcodeScannerComponentHandleUpdate}
           />
+          <button className="cancelScan" onClick={() => setScan(false)}>
+            X
+          </button>
         </div>
       )}
       <div>
+        <h2>Scanned Barcodes:</h2>
         {logs.map((log) => (
           <div key={log}>{log}</div>
         ))}
 
-        <button onClick={() => setLog([])}>CLEAR</button>
+        <button className="clearButton" onClick={() => setLog([])}>
+          CLEAR
+        </button>
       </div>
     </div>
   );
