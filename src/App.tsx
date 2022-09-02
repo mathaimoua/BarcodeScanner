@@ -20,8 +20,10 @@ export default function App() {
       <button onClick={() => setScan(true)}>SCAN</button>
       <button onClick={() => setScan(false)}>CANCEL</button>
       {scan && (
-        <div className="w-full h-12">
+        <div className="scanWindow">
           <BarcodeScannerComponent
+            width={500}
+            height={500}
             onUpdate={barcodeScannerComponentHandleUpdate}
           />
         </div>
