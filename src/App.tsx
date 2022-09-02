@@ -13,14 +13,14 @@ export default function App() {
     setInput1(event.target.value);
   };
 
+  const submitCode = () => {
+      setLog([...logs, input1]);
+      setInput1('');
+  };
+
   const barcodeScannerComponentHandleUpdate = (error: any, result: any) => {
-    // if (result) {
-    //   setLog([...logs, result.text]);
-    //   window.navigator.vibrate(100);
-    //   setScan(false);
-    // }
     if (result) {
-      setInput1(result);
+      setInput1(result.text);
       setScan(false);
     }
   };
@@ -49,15 +49,22 @@ export default function App() {
             X
           </button>
         </div>
+    
       )}
-      <div>
-        <h2>Scanned Barcodes:</h2>
+      <br></br>
+      <button 
+        className="submitCodes" 
+        onClick={submitCode}
+      >Submit Current Barcode</button>
+      <br></br>
+      <div className="barcodesDiv">
+        <h2>Submitted Barcodes:</h2>
         {logs.map((log) => (
           <div key={log}>{log}</div>
         ))}
 
         <button className="clearButton" onClick={() => setLog([])}>
-          CLEAR
+          Clear List
         </button>
       </div>
     </div>
